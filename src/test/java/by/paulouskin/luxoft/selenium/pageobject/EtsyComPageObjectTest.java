@@ -3,9 +3,7 @@ package by.paulouskin.luxoft.selenium.pageobject;
 import org.hamcrest.MatcherAssert;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
-import org.testng.annotations.AfterTest;
-import org.testng.annotations.BeforeTest;
-import org.testng.annotations.Test;
+import org.testng.annotations.*;
 
 import java.util.List;
 
@@ -16,16 +14,25 @@ public class EtsyComPageObjectTest {
     private WebDriver webDriver;
     private EtsyComPageObject etsyCom;
 
-    @BeforeTest
-    public void setUp() {
-        webDriver = new ChromeDriver();
-        etsyCom = new EtsyComPageObject(webDriver);
-        etsyCom.get();
+    @DataProvider
+    public Object[][] testData() {
+        return new Object[][] {
+                new Object[] {"leather bag"}
+                //new Object[] {"wedding gifts"},
+                //new Object[] {"paper toys"}
+        };
     }
 
-    @Test
-    public void pickFirstSearchSuggestionAndApplyResultFilters() {
-        etsyCom.searchForItem("leather bag")
+    @BeforeClass
+    public void setUp() {
+        webDriver = new ChromeDriver();
+        etsyCom = new EtsyComPageObject(webDriver).get();
+    }
+
+    @Test(dataProvider = "testData")
+    public void pickFirstSearchSuggestionAndApplyResultFilters(String searchItem) {
+        etsyCom
+                .searchForItem(searchItem)
                 .pickFirstSuggestion()
                 .applyFilterFromCategory("Free shipping","Shipping")
                 .applyFilterFromCategory("On sale", "Special offers")
@@ -37,7 +44,7 @@ public class EtsyComPageObjectTest {
 
 
 
-    @AfterTest
+    @AfterClass
     public void tearDown() {
         webDriver.quit();
     }

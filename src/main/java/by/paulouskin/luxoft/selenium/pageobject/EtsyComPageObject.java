@@ -22,14 +22,27 @@ public class EtsyComPageObject extends BaseLuxoftPageObject {
     private final String FILTER_TAGS = ".tag";
 
     private PolicyModalWindow policyModalWindow;
-    public EtsyComPageObject(WebDriver webDriver) {
-        super(webDriver);
-        policyModalWindow = new PolicyModalWindow(webDriver);
-    }
 
-    public void get() {
+    public EtsyComPageObject(WebDriver webDriver) {
+        super(webDriver, By.cssSelector("#sign-in"));
+        policyModalWindow = new PolicyModalWindow(webDriver);
         webDriver.get("http://www.etsy.com");
         policyModalWindow.acceptPolicy();
+    }
+
+    /*public void acceptPolicy() {
+        policyModalWindow.acceptPolicy();
+    }*/
+
+    public EtsyComPageObject get() {
+        try {
+            isLoaded();
+            return this;
+        } catch (Error e) {
+            load();
+        }
+        isLoaded();
+        return this;
     }
 
     //Page Interaction

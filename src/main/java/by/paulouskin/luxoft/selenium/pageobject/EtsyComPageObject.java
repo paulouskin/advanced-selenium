@@ -17,7 +17,7 @@ public class EtsyComPageObject extends BaseLuxoftPageObject {
     private final String SEARCH_BUTTON = "//button[contains(text(),'Search')]";
     private final String SEARCH_FIRST_SUGGESTION = "#search-suggestions ul li.as-first";
     private final String SEARCH_SUGGESTION_LIST = "#search-suggestions ul li";
-    private  String FILTER_FOR_CATEGORY_LINK = "//h5[text()='%s']/..//a[contains(.,'%s')]";
+    private  String FILTER_FOR_CATEGORY_LINK = "//h5[text()='%s']/../..//a[contains(.,'%s')]";
     private final String SHIPPING_COUNTRY_SELECTBOX = "#ship_to_select";
     private final String FILTER_TAGS = ".tag";
 

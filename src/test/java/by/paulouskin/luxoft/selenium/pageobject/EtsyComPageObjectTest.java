@@ -35,10 +35,13 @@ public class EtsyComPageObjectTest {
                 .searchForItem(searchItem)
                 .pickFirstSuggestion()
                 .applyFilterFromCategory("Free shipping","Shipping")
-                .applyFilterFromCategory("On sale", "Special offers")
+                //.applyFilterFromCategory("On sale", "Special offers")
                 .selectShippingCountry("Russia");
         List<String> filter_tag = etsyCom.getAppliedFilters();
-        MatcherAssert.assertThat(filter_tag, containsInAnyOrder("Free shipping", "On sale", "Ships to Russia"));
+        MatcherAssert.assertThat(filter_tag,
+                containsInAnyOrder("Free shipping",
+                        //"On sale",
+                        "Ships to Russia"));
     }
 
 

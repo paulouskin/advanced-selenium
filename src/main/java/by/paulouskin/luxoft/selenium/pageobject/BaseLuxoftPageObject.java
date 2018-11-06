@@ -5,6 +5,8 @@ import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.LoadableComponent;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
+import javax.imageio.ImageIO;
+import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
 import java.nio.file.Files;
@@ -76,5 +78,24 @@ public class BaseLuxoftPageObject extends LoadableComponent<BaseLuxoftPageObject
         } catch (IOException e) {
             e.printStackTrace();
         }
+    }
+
+    protected void captureElementScreenshot(WebElement webElement) throws IOException {
+        File screenshot = ((TakesScreenshot)webDriver)
+                .getScreenshotAs(OutputType.FILE);
+        BufferedImage fullImg = ImageIO.read(screenshot);
+        Point elementLocation = webElement.getLocation();
+        int webElHeight = webElement.getSize().getHeight();
+        int webElWidth = webElement.getSize().getWidth();
+        BufferedImage elementScreenShotImage = fullImg.getSubimage(
+                elementLocation.getX(), elementLocation.getY(),
+                webElWidth, webElHeight
+        );
+        ImageIO.write(elementScreenShotImage, "png",screenshot);
+        DateTimeFormatter dtf = DateTimeFormatter.ofPattern("yyyy-MM-dd HH-mm-ss");
+        String time = LocalDateTime.now().format(dtf);
+        File elementScreenshot = new File("target/we_screenshot"+
+                time +".png");
+        Files.copy(screenshot.toPath(), elementScreenshot.toPath());
     }
 }

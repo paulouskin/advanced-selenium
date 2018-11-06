@@ -7,6 +7,7 @@ import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.Select;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
+import java.io.IOException;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -17,7 +18,7 @@ public class EtsyComPageObject extends BaseLuxoftPageObject {
     private final String SEARCH_BUTTON = "//button[contains(text(),'Search')]";
     private final String SEARCH_FIRST_SUGGESTION = "#search-suggestions ul li.as-first";
     private final String SEARCH_SUGGESTION_LIST = "#search-suggestions ul li";
-    private  String FILTER_FOR_CATEGORY_LINK = "//h5[text()='%s']/../..//a[contains(.,'%s')]";
+    private final String FILTER_FOR_CATEGORY_LINK = "//h3[text()='%s']/../..//a[contains(.,'%s')]";
     private final String SHIPPING_COUNTRY_SELECTBOX = "#ship_to_select";
     private final String FILTER_TAGS = ".tag";
 
@@ -58,6 +59,11 @@ public class EtsyComPageObject extends BaseLuxoftPageObject {
 
     public EtsyComPageObject pickFirstSuggestion() {
         WebElement firstSuggestion = getFirstSuggestionElement();
+        try {
+            captureElementScreenshot(firstSuggestion);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
         firstSuggestion.click();
         return this;
     }

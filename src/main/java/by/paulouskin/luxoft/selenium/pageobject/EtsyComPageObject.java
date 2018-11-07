@@ -1,5 +1,6 @@
 package by.paulouskin.luxoft.selenium.pageobject;
 
+
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
@@ -7,7 +8,6 @@ import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.Select;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
-import java.io.IOException;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -59,11 +59,6 @@ public class EtsyComPageObject extends BaseLuxoftPageObject {
 
     public EtsyComPageObject pickFirstSuggestion() {
         WebElement firstSuggestion = getFirstSuggestionElement();
-        try {
-            captureElementScreenshot(firstSuggestion);
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
         firstSuggestion.click();
         return this;
     }
@@ -77,7 +72,7 @@ public class EtsyComPageObject extends BaseLuxoftPageObject {
     private WebElement checkFilterForCategorySection(String filter, String category) {
         String xpath = String.format(FILTER_FOR_CATEGORY_LINK, category, filter);
         return new WebDriverWait(webDriver,10).until(
-                ExpectedConditions.presenceOfElementLocated(By.xpath(xpath))
+                webDriver1 -> webDriver1.findElement(By.xpath(xpath))
         );
     }
 

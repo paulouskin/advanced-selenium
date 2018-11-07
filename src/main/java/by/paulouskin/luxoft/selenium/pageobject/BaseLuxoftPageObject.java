@@ -10,12 +10,9 @@ import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
 import java.nio.file.Files;
-import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.List;
-
-import static java.lang.System.currentTimeMillis;
 
 public class BaseLuxoftPageObject extends LoadableComponent<BaseLuxoftPageObject> {
 
@@ -31,7 +28,7 @@ public class BaseLuxoftPageObject extends LoadableComponent<BaseLuxoftPageObject
 
     public WebElement findElementWithWait(By locator) {
         return new WebDriverWait(webDriver, MAX_WAIT_TIME).until(
-                ExpectedConditions.visibilityOfElementLocated(locator)
+                we -> we.findElement(locator)
         );
     }
 

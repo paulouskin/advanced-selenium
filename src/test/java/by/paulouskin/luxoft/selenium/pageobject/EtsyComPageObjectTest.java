@@ -1,9 +1,12 @@
 package by.paulouskin.luxoft.selenium.pageobject;
 
+import by.paulouskin.luxoft.selenium.drivermanager.DriverManager;
 import org.hamcrest.MatcherAssert;
 import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.chrome.ChromeDriver;
-import org.testng.annotations.*;
+import org.testng.annotations.AfterClass;
+import org.testng.annotations.BeforeClass;
+import org.testng.annotations.DataProvider;
+import org.testng.annotations.Test;
 
 import java.util.List;
 
@@ -17,15 +20,16 @@ public class EtsyComPageObjectTest {
     @DataProvider
     public Object[][] testData() {
         return new Object[][] {
-                new Object[] {"leather bag"}
-                //new Object[] {"wedding gifts"},
+                new Object[] {"leather bag"},
+                new Object[] {"wedding gifts"}
                 //new Object[] {"paper toys"}
         };
     }
 
     @BeforeClass
     public void setUp() {
-        webDriver = new ChromeDriver();
+        boolean isHeadless = Boolean.valueOf(System.getProperty("isHeadless"));
+        webDriver = DriverManager.getChromeDriver(isHeadless);
         etsyCom = new EtsyComPageObject(webDriver).get();
     }
 
@@ -43,9 +47,6 @@ public class EtsyComPageObjectTest {
                         //"On sale",
                         "Ships to Russia"));
     }
-
-
-
 
     @AfterClass
     public void tearDown() {

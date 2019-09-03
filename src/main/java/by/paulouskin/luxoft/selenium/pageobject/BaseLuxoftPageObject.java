@@ -16,10 +16,9 @@ import java.util.List;
 
 public class BaseLuxoftPageObject extends LoadableComponent<BaseLuxoftPageObject> {
 
-    WebDriver webDriver;
-    By pageWrapper;
+    final WebDriver webDriver;
+    final By pageWrapper;
     private final int MAX_WAIT_TIME = 60;
-    private final int LOAD_WAIT_TIME = 5;
 
     public BaseLuxoftPageObject(WebDriver webDriver, By pageWrapper) {
         this.webDriver = webDriver;
@@ -54,6 +53,7 @@ public class BaseLuxoftPageObject extends LoadableComponent<BaseLuxoftPageObject
 
     private boolean isPageWrapperVisible() {
         try {
+            int LOAD_WAIT_TIME = 5;
             new WebDriverWait(webDriver, LOAD_WAIT_TIME).until(
                     ExpectedConditions.visibilityOfElementLocated(pageWrapper)
             );

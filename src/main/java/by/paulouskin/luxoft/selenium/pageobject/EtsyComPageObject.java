@@ -13,20 +13,9 @@ import java.util.stream.Collectors;
 
 public class EtsyComPageObject extends BaseLuxoftPageObject {
 
-    //Selectors
-    private final String SEARCH_FIELD = "#search-query";
-    private final String SEARCH_BUTTON = "//button[contains(text(),'Search')]";
-    private final String SEARCH_FIRST_SUGGESTION = "#search-suggestions ul li.as-first";
-    private final String SEARCH_SUGGESTION_LIST = "#search-suggestions ul li";
-    private final String FILTER_FOR_CATEGORY_LINK = "//h3[text()='%s']/../..//a[contains(.,'%s')]";
-    private final String SHIPPING_COUNTRY_SELECTBOX = "#ship_to_select";
-    private final String FILTER_TAGS = ".tag";
-
-    private PolicyModalWindow policyModalWindow;
-
-    public EtsyComPageObject(WebDriver webDriver) {
-        super(webDriver, By.cssSelector("#sign-in"));
-        policyModalWindow = new PolicyModalWindow(webDriver);
+    EtsyComPageObject(WebDriver webDriver) {
+        super(webDriver, By.id("content"));
+        PolicyModalWindow policyModalWindow = new PolicyModalWindow(webDriver);
         webDriver.get("http://www.etsy.com");
         policyModalWindow.acceptPolicy();
     }
@@ -52,7 +41,6 @@ public class EtsyComPageObject extends BaseLuxoftPageObject {
         searchField.clear();
         searchField.sendKeys(item);
         waitForSuggestionDropDown();
-        //getSearchButton().click();
         return this;
     }
 
@@ -70,6 +58,7 @@ public class EtsyComPageObject extends BaseLuxoftPageObject {
     }
 
     private WebElement checkFilterForCategorySection(String filter, String category) {
+        String FILTER_FOR_CATEGORY_LINK = "//h3[text()='%s']/../..//a[contains(.,'%s')]";
         String xpath = String.format(FILTER_FOR_CATEGORY_LINK, category, filter);
         return new WebDriverWait(webDriver,10).until(
                 webDriver1 -> webDriver1.findElement(By.xpath(xpath))
@@ -83,31 +72,38 @@ public class EtsyComPageObject extends BaseLuxoftPageObject {
     }
     //Wait
     private void waitForSuggestionDropDown() {
+        String SEARCH_SUGGESTION_LIST = "#search-suggestions ul li";
         new WebDriverWait(webDriver,30).until(
                 ExpectedConditions.visibilityOfElementLocated(By.cssSelector(SEARCH_SUGGESTION_LIST)));
     }
     //Getters
 
     private WebElement getSearchField() {
+        //Selectors
+        String SEARCH_FIELD = "#search-query";
         return findElementWithWait(By.cssSelector(SEARCH_FIELD));
     }
 
 
     private WebElement getFirstSuggestionElement() {
+        String SEARCH_FIRST_SUGGESTION = "#search-suggestions ul li.as-first";
         return findElementWithWait(By.cssSelector(SEARCH_FIRST_SUGGESTION));
     }
 
     private WebElement getSearchButton() {
+        String SEARCH_BUTTON = "//button[contains(text(),'Search')]";
         return findElementWithWait(By.xpath(SEARCH_BUTTON));
     }
 
     private WebElement getShippingCountryElement() {
+        String SHIPPING_COUNTRY_SELECTBOX = "#ship_to_select";
         return findElementWithWait(By.cssSelector(SHIPPING_COUNTRY_SELECTBOX));
     }
 
     public List<String> getAppliedFilters() {
+        String FILTER_TAGS = ".tag";
         return findElementsWithWait(By.cssSelector(FILTER_TAGS)).stream()
-                .map(webElement -> webElement.getText())
+                .map(WebElement::getText)
                 .collect(Collectors.toList());
     }
 }

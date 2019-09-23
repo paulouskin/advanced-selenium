@@ -14,7 +14,7 @@ import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.List;
 
-public class BaseLuxoftPageObject extends LoadableComponent<BaseLuxoftPageObject> {
+public class BaseLuxoftPageObject {
 
     final WebDriver webDriver;
     final By pageWrapper;
@@ -38,18 +38,6 @@ public class BaseLuxoftPageObject extends LoadableComponent<BaseLuxoftPageObject
     }
 
 
-    @Override
-    protected void load() {
-
-    }
-
-    @Override
-    protected void isLoaded() throws Error {
-        if(!isPageWrapperVisible()) {
-            webDriver.quit();
-            throw new Error("Page didn't load properly.");
-        }
-    }
 
     private boolean isPageWrapperVisible() {
         try {

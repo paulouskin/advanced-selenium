@@ -20,7 +20,6 @@ public class EtsyComPageObjectTest {
     public void setUp() {
         boolean isHeadless = Boolean.valueOf(System.getProperty("isHeadless"));
         webDriver = DriverManager.getChromeDriver(isHeadless);
-        EtsyComPageObject etsyCom = new EtsyComPageObject(webDriver).get();
     }
 
     @Test

@@ -11,7 +11,7 @@ import java.io.File;
 import java.io.FileOutputStream;
 import java.io.IOException;
 
-import static by.paulouskin.luxoft.selenium.drivermanager.DriverBase.getDriver;
+import static by.paulouskin.luxoft.selenium.config.DriverBase.getDriver;
 
 public class ScreenshotListener extends TestListenerAdapter {
 

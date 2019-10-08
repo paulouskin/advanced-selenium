@@ -1,6 +1,6 @@
 package by.paulouskin.luxoft.selenium.pageobject;
 
-import by.paulouskin.luxoft.selenium.drivermanager.DriverBase;
+import by.paulouskin.luxoft.selenium.config.DriverBase;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
@@ -8,12 +8,7 @@ import org.openqa.selenium.support.ui.ExpectedCondition;
 import org.openqa.selenium.support.ui.WebDriverWait;
 import org.testng.annotations.*;
 
-import java.util.List;
-import java.util.concurrent.TimeUnit;
-import java.util.function.Function;
-
 import static org.hamcrest.MatcherAssert.assertThat;
-import static org.hamcrest.Matchers.*;
 
 public class BasicIT extends DriverBase {
 

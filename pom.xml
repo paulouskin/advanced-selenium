@@ -17,6 +17,7 @@
         <uncommons.version>1.1.4</uncommons.version>
         <threads>2</threads>
         <browser>firefox</browser>
+        <headless>false</headless>
     </properties>
     <dependencies>
         <dependency>
@@ -68,6 +69,7 @@
                     <threadCount>${threads}</threadCount>
                     <systemPropertyVariables>
                         <browser>${browser}</browser>
+                        <headless>${headless}</headless>
                     </systemPropertyVariables>
                 </configuration>
                 <executions>

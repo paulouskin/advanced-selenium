@@ -7,8 +7,11 @@ import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.ui.ExpectedCondition;
 import org.openqa.selenium.support.ui.WebDriverWait;
 import org.testng.annotations.*;
+import org.testng.asserts.Assertion;
 
 import static org.hamcrest.MatcherAssert.assertThat;
+import static org.hamcrest.Matchers.containsString;
+import static org.hamcrest.Matchers.equalTo;
 
 public class BasicIT extends DriverBase {
 
@@ -23,11 +26,10 @@ public class BasicIT extends DriverBase {
         WebElement searchField = driver.findElement(By.name("q"));
         searchField.clear();
         searchField.sendKeys(searchString);
-        System.out.println("Page title is: " + driver.getTitle());
         searchField.submit();
         WebDriverWait wait = new WebDriverWait(driver, 10, 100);
         wait.until(pageTitleStartsWith(searchString));
-        System.out.println("Page title is: " + driver.getTitle());
+        assertThat(driver.getTitle(), containsString(searchString));
     }
 
     @Test

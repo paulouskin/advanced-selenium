@@ -18,6 +18,7 @@
         <threads>2</threads>
         <browser>firefox</browser>
         <headless>false</headless>
+        <screenshotDirectory>${project.build.directory}/screenshots</screenshotDirectory>
     </properties>
     <dependencies>
         <dependency>

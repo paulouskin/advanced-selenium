@@ -13,12 +13,11 @@ public class BasicIT extends DriverBase {
 
 
     private void googleExampleThatSearchesFor(final String searchString) {
-        WebDriver driver = DriverBase.getDriver();
-        GoogleIndexPage googlePage = new GoogleIndexPage(driver);
-        googlePage.goTo(driver);
-        googlePage.searchFor(searchString, driver);
-        googlePage.waitUntilPageTitleContainsSearchQuery(searchString, driver);
-        assertThat(driver.getTitle(), containsString(searchString));
+        GoogleIndexPage googlePage = new GoogleIndexPage();
+        googlePage.goTo();
+        googlePage.searchFor(searchString);
+        googlePage.waitUntilPageTitleContainsSearchQuery(searchString);
+        assertThat(googlePage.getPageTitle(), containsString(searchString));
     }
 
     @Test

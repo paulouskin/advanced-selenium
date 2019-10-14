@@ -12,6 +12,7 @@
         <failsafe.version>2.21.0</failsafe.version>
         <java.version>1.8</java.version>
         <selenium.version>3.141.59</selenium.version>
+        <selenium.query.version>1.2.0</selenium.query.version>
         <testng.version>6.14.3</testng.version>
         <hamcrest.version>1.3</hamcrest.version>
         <uncommons.version>1.1.4</uncommons.version>
@@ -40,6 +41,11 @@
             <groupId>org.seleniumhq.selenium</groupId>
             <artifactId>selenium-api</artifactId>
             <version>${selenium.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>com.lazerycode.selenium</groupId>
+            <artifactId>query</artifactId>
+            <version>${selenium.query.version}</version>
         </dependency>
         <dependency>
             <groupId>org.hamcrest</groupId>

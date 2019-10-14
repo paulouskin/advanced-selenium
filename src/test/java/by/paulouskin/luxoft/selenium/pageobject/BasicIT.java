@@ -14,9 +14,10 @@ public class BasicIT extends DriverBase {
 
     private void googleExampleThatSearchesFor(final String searchString) {
         WebDriver driver = DriverBase.getDriver();
-        GoogleIndexPage.goTo(driver);
-        GoogleIndexPage.searchFor(searchString, driver);
-        GoogleIndexPage.waitUntilPageTitleContainsSearchQuery(searchString, driver);
+        GoogleIndexPage googlePage = new GoogleIndexPage(driver);
+        googlePage.goTo(driver);
+        googlePage.searchFor(searchString, driver);
+        googlePage.waitUntilPageTitleContainsSearchQuery(searchString, driver);
         assertThat(driver.getTitle(), containsString(searchString));
     }
 

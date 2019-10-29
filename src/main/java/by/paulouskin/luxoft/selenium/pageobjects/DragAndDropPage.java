@@ -8,14 +8,14 @@ import java.util.List;
 
 public class DragAndDropPage extends BasePage {
 
-    private static final By CONSUMER_RECTANGLE = By.id("obliterate");
-    private static final By REMOVABLE_BOX = By.cssSelector("ul > li > div");
+    protected static final By CONSUMER_RECTANGLE = By.id("obliterate");
+    protected static final By REMOVABLE_BOX = By.cssSelector("ul > li > div");
 
     public void goTo() {
         driver.get("http://web.masteringselenium.com/jsDragAndDrop.html");
     }
 
-    private List<WebElement> getBoxes() {
+    protected List<WebElement> getBoxes() {
         return driver.findElements(REMOVABLE_BOX);
     }
 
